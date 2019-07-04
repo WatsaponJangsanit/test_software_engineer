@@ -12,8 +12,9 @@ import cv2
 import numpy as np 
 import time
 
-from my_functions import data_processing, cal_xy
 from PIL import Image, ImageDraw
+from my_functions import data_processing, cal_xy
+
 
 
 images = [] # prepare list for create .gif file
