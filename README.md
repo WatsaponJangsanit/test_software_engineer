@@ -37,15 +37,17 @@ Selected Tasks: 1. Display and 5. Mapping
 
 # Installation
 1. Download and install python3
+ 
+2. pip install --upgrade pip  
+
+3. pip install -r requirements.txt  
   
-2. pip install -r requirements.txt
-  
-3. Open CMD on your git clone local  
+4. Open CMD on your git clone local  
    Type "python display.py" to run the task1 file  
    The results will appear according to the number of sweeps(34 times)  
    And create .gif file of all sweeps.  
      
-4. On the same CMD  
+5. On the same CMD  
    Type "python mapping.py" to run the task5 file   
    The results will be Mapping.csv file and Detected edge Image  
      
