@@ -86,6 +86,7 @@ with open('​Mapping.csv', 'w', newline='') as csvfile:
     for line in lines:
         for x1,y1,x2,y2 in line:
                 cv2.line(line_image,(x1,y1),(x2,y2),(255,0,0),5)   
+                # convert to millimeters by multiplying 10
                 filewriter.writerow([str(x1*10), 
                                      str(y1*10), 
                                      str(x2*10), 
