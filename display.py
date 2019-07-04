@@ -7,62 +7,17 @@ Created on Thu Jul  4 15:14:58 2019
 
 from PIL import Image, ImageDraw
 import pandas as pd
-import math
+
+from my_functions import data_processing, cal_xy
 
 images = [] # prepare list for create .gif file
-
 df = pd.read_csv('LIDARPoints.csv', header=None) # read LIDARPoints.csv as dataframe
 df_flight = pd.read_csv('FlightPath.csv', header=None) # read FlightPath.csv as dataframe
-
-
-##################################################
-############## data processing start #############
 df_flight = df_flight[1::2] # skip id
-s_num = int(df.iloc[0][1]) # number of data lines of the first ID
-d = {} # prepare dictionaries to make data management easier
-tmp_list = [] #to rest angle of the data point and the distance  of each ID
-c = -1 #for countdown the line number
-for index, row in df.iterrows():
-    if s_num == c :
-        d[int(tmp_list[0][0])] = tmp_list[1:]
-        s_num = int(row[1])
-        c = -1
-        tmp_list = []
-    elif index == df.shape[0]-1: # last id
-        tmp_list.append(list(row))
-        d[int(tmp_list[0][0])] = tmp_list[1:]
-    tmp_list.append(list(row))
-    c += 1
-
-############## data processing end ###############
-##################################################
-    
-    
-def cal_xy(center, degrees, distance): # this function converts the distance into centimeters
-    
-    # use trigonometry and convert millimeters to centimeters
-    xy_tuple = [abs(int(round(math.cos(math.radians(degrees))*distance,2)/10)), 
-                abs(int(round(math.sin(math.radians(degrees))*distance,2)/10))]
-    
-    # convert meters to centimeters
-    center_x = int(center[0]*100)
-    center_y = int(center[1]*100)
-    
-    ### Because drones are the central axis x, y Therefore, the degree must be specified to draw on the image.
-    if 0 <degrees < 90 :
-        xy_tuple = (center_x + xy_tuple[0],center_y - xy_tuple[1])
-    elif 90 <degrees < 180 :
-        xy_tuple = (center_x - xy_tuple[0],center_y - xy_tuple[1])
-    elif 180 <degrees < 270 :
-        xy_tuple = (center_x - xy_tuple[0],center_y + xy_tuple[1])
-    else:
-        xy_tuple = (center_x + xy_tuple[0],center_y + xy_tuple[1])
-
-    return(xy_tuple)
-
-
+d = data_processing(df)
 loop_index = 0
 d_max = [] # this value is for the specified size of the image.
+
 for k, v in d.items(): # loop in dictionaries
     # each round is one sweep
     tmp = []
@@ -81,9 +36,9 @@ for k, v in d.items(): # loop in dictionaries
     x_f = int(df_flight.iloc[loop_index][0]*100)
     y_f = int(df_flight.iloc[loop_index][1]*100)
    
-    # make frame of image and set size by farthest point plus 500
+    # make frame of image and set size by farthest point plus 100
     # 1 pixel equal to 1 cm
-    im = Image.new('RGB', (d_max[loop_index]+500, d_max[loop_index]+500), (0, 0, 0))
+    im = Image.new('RGB', (d_max[loop_index]+100, d_max[loop_index]+100), (0, 0, 0))
     draw = ImageDraw.Draw(im)
     
     # draw drones
