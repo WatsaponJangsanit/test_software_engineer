@@ -50,15 +50,18 @@ draw = ImageDraw.Draw(im)
 for n in d :
     for dw in d[n]:
         draw.rectangle([dw,(dw[0]+5,dw[1]+5)], fill=(255, 255, 0))
-    
+# create all_points image    
 im.save("images/all_points.jpg", "JPEG", quality=95, optimize=True, progressive=True)
 
+# wait
 time.sleep(3)
 
-
+# use openCV to detect edge
 img = cv2.imread('images/all_points.jpg')
+# convert to gray color
 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
+# set parameter
 kernel_size = 5
 blur_gray = cv2.GaussianBlur(gray,(kernel_size, kernel_size),0)
 
@@ -77,7 +80,7 @@ line_image = np.copy(img) * 0  # creating a blank to draw lines on
 # Output "lines" is an array containing endpoints of detected line segments
 lines = cv2.HoughLinesP(edges, rho, theta, threshold, np.array([]),  min_line_length, max_line_gap)
 
-
+# create a ​Mapping.csv file with the detected edge
 with open('​Mapping.csv', 'w', newline='') as csvfile:
     filewriter = csv.writer(csvfile)
     for line in lines:
@@ -88,9 +91,9 @@ with open('​Mapping.csv', 'w', newline='') as csvfile:
                                      str(x2*10), 
                                      str(y2*10)])
 
-         
+ 
+# make image with detected edge         
 lines_edges = cv2.addWeighted(img, 0.8, line_image, 1, 0)
-
 cv2.imwrite('images/img_CV2_90.jpg', lines_edges, [int(cv2.IMWRITE_JPEG_QUALITY), 90])
 
 
