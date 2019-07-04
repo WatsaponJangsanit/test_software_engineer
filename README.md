@@ -54,5 +54,8 @@ Selected Tasks: 1. Display and 5. Mapping
   Tasks: 1. Display  
 ![resize](https://user-images.githubusercontent.com/28421585/60665467-7f0c1e00-9e9f-11e9-9d62-860a73ad0125.gif)
 
-  Tasks: 5. Mapping   
-![image](https://user-images.githubusercontent.com/28421585/60665231-ea092500-9e9e-11e9-9d3c-c54d2b3ea86d.png)
+  Tasks: 5. Mapping  
+   (xstart, ystart, xend, ystart)  
+![image](https://user-images.githubusercontent.com/28421585/60665231-ea092500-9e9e-11e9-9d3c-c54d2b3ea86d.png)  
+
+ 
