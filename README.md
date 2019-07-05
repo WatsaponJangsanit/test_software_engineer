@@ -23,6 +23,22 @@ Selected Tasks: 1. Display and 5. Mapping
   And because drones position is central axis of x, y  
   the calculation will be the picture below  
   ![image](https://user-images.githubusercontent.com/28421585/60670037-b59b6600-9eaa-11e9-926b-b2430929c0e0.png)  
+  example :  
+1. One point have  θ=10˚ and distance from drone is 5000 millimeter  
+2. drone position is x = 5 meter, y =4  
+  
+Because θ = 10˚  x of point will plus with x position of drone  
+and y of point will minus with y position of drone  
+
+x = (drone[x]*100) +  |(cosθ* distance)/10|  
+   = (5*100) + |(-0.83907152907 × 5000)/10|  
+   ~= 919.53  
+   = 920  
+y = (drone[y]*100) - |(sinθ* distance)/10|  
+   = (4*100) - |(-0.54402111088 × 5000)/10|  
+   ~= 127.99  
+   = 128  
+  This point will be appear at 920,128 in frame  
   That is all required to complete task 1.  
     
   For task 5 use opencv to solve this problem.  
