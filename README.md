@@ -47,7 +47,7 @@ Selected Tasks: 1. Display and 5. Mapping
    The results will appear according to the number of sweeps(34 times)  
    And create .gif file of all sweeps.  
      
-5. On the same CMD  
+5. Open CMD on your git clone local 
    Type "python mapping.py" to run the task5 file   
    The results will be Mapping.csv file and Detected edge Image  
      
